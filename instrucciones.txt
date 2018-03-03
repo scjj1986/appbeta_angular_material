@@ -1,22 +1,22 @@
-1) Instalar AppServ versi髇 8.6
-	*En la instalaci髇, colocar contrase馻 : 1234567-
+1) Instalar AppServ versi贸n 8.6
+	*En la instalaci贸n, colocar contrase帽a : 1234567-
 
-2) Acceder a phpMyAdmin en el navegador web (direcci髇: "http://localhost/phpMyAdmin").
+2) Acceder a phpMyAdmin en el navegador web (direcci贸n: "http://localhost/phpMyAdmin").
 	*usuario: root
-	*contrase馻: 1234567-
+	*contrase帽a: 1234567-
 
 3) crear manualmente base de datos (nombre: test_2).
 
-4) Importar base de datos (archivo test.sql, ubicado en src/app/sql).
+4) Importar base de datos (archivo test.sql, ubicado en "src/app/sql").
 
-5) Copiar contenido del repositorio en esta direcci髇 en el explorador de archivos (C:\AppServ\www)
+5) Copiar carpeta ra铆z del repositorio al directorio "C:\AppServ\www".
 
 6) Instalar Node.js, y Yarn (de ser necesario).
 
-7) En c髇sola de comandos instalar Angular CLI.
+7) En c贸nsola de comandos instalar Angular CLI.
 
-8) Acceder por c髇sola al directorio C:\AppServ\www\appbeta_angular_material
+8) Acceder por c贸nsola al directorio "C:\AppServ\www\appbeta_angular_material".
 
 9) Ejecutar comando "ng serve".
 
-10) Ir a navegador, direcci髇 "http://localhost:4200/"
+10) Ir a navegador, direcci贸n "http://localhost:4200/"
