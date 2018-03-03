@@ -1,0 +1,8 @@
+.espacio-para-alinear-a-la-derecha {
+  flex: 1 1 auto;
+}
+
+.itemUsuario{
+	margin-top: 10%;
+	background-color: blue;
+}

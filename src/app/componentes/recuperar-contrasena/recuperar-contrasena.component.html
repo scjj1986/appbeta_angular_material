@@ -1,0 +1,66 @@
+<mat-card>
+    <mat-toolbar color="primary">
+    <mat-icon>autorenew</mat-icon><span>&nbsp;{{this.titulo}}</span>
+  </mat-toolbar>
+  <br>
+  	<!-- ------------------------------------ Paso 1 (Usuario) --------------------------------------------- -->
+    <div class="container" *ngIf="mostrarPaso1">
+	        <mat-form-field>
+	          <input matInput placeholder="Usuario" [(ngModel)]="rc.usuario" maxlength="30" required>
+	          <mat-error>Campo obligatorio</mat-error>
+	        </mat-form-field>
+	        <div align="right" class="button-row">
+	          <button [disabled]="bloquearBotonSigPaso1()" (click)="paso1BuscarUsuario()" mat-raised-button color="primary"><mat-icon>arrow_forward</mat-icon>Siguiente</button>
+	          <button (click)="redirigirLogin()" mat-raised-button color="basic"><mat-icon>cancel</mat-icon>Cancelar</button>
+	        </div>
+    </div>
+    <!-- ------------------------------- Paso 2 (Pregunta y Respuesta) -------------------------------------- -->
+    <div class="container" *ngIf="mostrarPaso2">
+    		<p>
+    		<b>Nombre : </b>{{rc.nombreCompleto}}
+    		</p>
+    		<p>
+    		<b>Usuario : </b>{{rc.usuario}}
+    		</p>
+	        <mat-form-field>
+	          <input matInput [(ngModel)]="rc.pregunta" maxlength="30" disabled>
+	        </mat-form-field>
+	        <mat-form-field>
+	          <input maxlength="30" placeholder="Respuesta" matInput [(ngModel)]="rc.respuesta" [type]="visible ? 'text' : 'password'"   required>
+	          <mat-icon matSuffix (click)="visible = !visible">{{visible ? 'visibility_off' : 'visibility'}}</mat-icon>
+	          <mat-error>Campo obligatorio</mat-error>
+	        </mat-form-field>
+	        <div align="right" class="button-row">
+	          <button [disabled]="bloquearBotonSigPaso2()" (click)="paso2verificarRespuesta()" mat-raised-button color="primary"><mat-icon>arrow_forward</mat-icon>Siguiente</button>
+	          <button (click)="volverPaso1()" mat-raised-button color="warn"><mat-icon>arrow_backward</mat-icon>Anterior</button>
+	          <button (click)="redirigirLogin()" mat-raised-button color="basic"><mat-icon>cancel</mat-icon>Cancelar</button>
+	        </div>
+    </div>
+    <!-- ------------------------------- Paso 3 (Clave Nueva) -------------------------------------- -->
+    <div class="container" *ngIf="mostrarPaso3">
+    		<p>
+    		<b>Nombre : </b>{{rc.nombreCompleto}}
+    		</p>
+    		<p>
+    		<b>Usuario : </b>{{rc.usuario}}
+    		</p>
+	        <mat-form-field>
+	          <input maxlength="30" placeholder="Clave" matInput [(ngModel)]="rc.clave" [type]="visible2 ? 'text' : 'password'" (keyup)="validarClavesIguales()"   required>
+	          <mat-icon matSuffix (click)="visible2 = !visible2">{{visible2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+	          <mat-hint *ngIf="mostrarErrorClave">Las claves deben ser iguales</mat-hint>
+	          <mat-error>Campo obligatorio</mat-error>
+	        </mat-form-field>
+	        <mat-form-field>
+	          <input maxlength="30" placeholder="Repetir Clave" matInput [(ngModel)]="rc.repetirClave" [type]="visible3 ? 'text' : 'password'" (keyup)="validarClavesIguales()"   required>
+	          <mat-icon matSuffix (click)="visible3 = !visible3">{{visible3 ? 'visibility_off' : 'visibility'}}</mat-icon>
+	          <mat-hint *ngIf="mostrarErrorClave">Las claves deben ser iguales</mat-hint>
+	          <mat-error>Campo obligatorio</mat-error>
+	        </mat-form-field>
+	        <div align="right" class="button-row">
+	          <button [disabled]="bloquearBotonFinalizarPaso3()" (click)="paso3GuardarClaveNueva()" mat-raised-button color="primary"><mat-icon>check</mat-icon>Finalizar</button>
+	          <button (click)="volverPaso2()" mat-raised-button color="warn"><mat-icon>arrow_backward</mat-icon>Anterior</button>
+	          <button (click)="redirigirLogin()" mat-raised-button color="basic"><mat-icon>cancel</mat-icon>Cancelar</button>
+	        </div>
+    </div>
+
+</mat-card>

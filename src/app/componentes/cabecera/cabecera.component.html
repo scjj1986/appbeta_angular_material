@@ -1,0 +1,4 @@
+<div class="cabecera">
+	<app-menu *ngIf="verificarLogueo()"> </app-menu>
+	<app-barra-principal *ngIf="!verificarLogueo()"> </app-barra-principal>
+</div>

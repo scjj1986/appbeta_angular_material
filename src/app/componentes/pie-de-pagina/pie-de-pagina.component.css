@@ -1,0 +1,15 @@
+.espacio {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    margin-bottom: 0.1%;
+}
+
+mat-toolbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%  !important;
+    height:6%;
+}

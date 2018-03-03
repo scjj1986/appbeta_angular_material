@@ -1,0 +1,27 @@
+<mat-toolbar color="primary">
+			<span>
+				<button [routerLink]="['/inicio']" mat-button><mat-icon>home</mat-icon>&nbsp;Inicio</button>
+				<button [routerLink]="['/usuarioListado']" mat-button ><mat-icon>account_circle</mat-icon>&nbsp;Usuarios</button>
+				<button mat-button [matMenuTriggerFor]="menuEmpresa"><mat-icon>business</mat-icon>&nbsp;Empresa<mat-icon>more_vert</mat-icon></button>
+				<mat-menu #menuEmpresa="matMenu">
+				  <button [routerLink]="['/departamentoListado']" mat-menu-item>Departamentos</button>
+				  <button [routerLink]="['/cargoListado']" mat-menu-item>Cargos</button>
+				  <button [routerLink]="['/empleadoListado']" mat-menu-item>Empleados</button>
+				</mat-menu>
+			</span>
+
+			<span class="espacio-para-alinear-a-la-derecha"></span>
+
+			{{this.nombreUsuario}}
+			<span>
+				<button mat-icon-button [matMenuTriggerFor]="menuUsuario">
+				  <mat-icon>more_vert</mat-icon>
+				</button>
+				<div class="itemUsuario">
+					<mat-menu #menuUsuario="matMenu">
+					  <!--button mat-menu-item>Editar Perfil</button-->
+					  <button (click)="cerrarSesion()" mat-menu-item> Cerrar Sesión</button>
+					</mat-menu>
+				</div>
+			</span>
+</mat-toolbar>

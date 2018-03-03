@@ -1,0 +1,209 @@
+<mat-card>
+	<mat-toolbar color="primary">
+		<mat-icon>{{logo}}</mat-icon><span>&nbsp;{{titulo}}</span>
+	</mat-toolbar>
+	<br>
+		<mat-grid-list cols="3" rowHeight="5:1">
+		   
+			<mat-grid-tile>
+			     <b>*N° Ficha:&nbsp;</b>
+			     <mat-form-field style="width: 10%;">
+		     	     <input maxlength="20" matInput [(ngModel)]="_empleado.ficha" [disabled]="true">
+		        </mat-form-field>
+		   </mat-grid-tile>
+		   <mat-grid-tile>
+		   		<b>*Tipo Documento:&nbsp;</b>
+		   		<mat-form-field style="width: 25%;">
+				  <mat-select [(ngModel)]="_empleado.tDoc" required>
+				    <mat-option value="V">V</mat-option>
+				    <mat-option value="E">E</mat-option>
+				    <mat-option value="P">P</mat-option>
+				  </mat-select>
+				 <mat-error>Campo obligatorio</mat-error>
+				</mat-form-field>
+		   </mat-grid-tile>
+
+		   <mat-grid-tile>
+			     <b>*N° Documento:&nbsp;</b>
+			     <mat-form-field style="width: 40%;">
+		     	     <input maxlength="20" matInput [(ngModel)]="_empleado.nDoc" (keypress)="validarNumeros($event)" (paste)="false" required>
+		     	     <mat-error>Campo obligatorio</mat-error>
+		        </mat-form-field>
+		   </mat-grid-tile>
+
+		   <mat-grid-tile>
+		     <b>*Nombre:&nbsp;</b>
+		     <mat-form-field style="width: 60%;">
+	     	     <input maxlength="60" matInput [(ngModel)]="_empleado.nombre" (paste)="false" (keypress)="validarLetras($event)" required>
+	     	     <mat-error>Campo obligatorio</mat-error>
+	        </mat-form-field>
+		   </mat-grid-tile>
+
+
+		   <mat-grid-tile>
+		     <b>*Apellido:&nbsp;</b>
+		     <mat-form-field style="width: 60%;">
+	     	     <input maxlength="60" matInput [(ngModel)]="_empleado.apellido" (paste)="false" (keypress)="validarLetras($event)" required>
+	     	     <mat-error>Campo obligatorio</mat-error>
+	        </mat-form-field>
+		   </mat-grid-tile>
+
+		   <mat-grid-tile>
+		     <b>*F. Nac.:&nbsp;</b>
+		     <mat-form-field style="width: 35%;">
+	     	     <input type="date" [max]="fechaMaxima()" matInput [(ngModel)]="_empleado.fNac" (paste)="false" required>
+	     	     <mat-error>Campo obligatorio</mat-error>
+	        </mat-form-field>
+		   </mat-grid-tile>
+
+		   <mat-grid-tile>
+		     <b>*Lugar Nac.:&nbsp;</b>
+		     <mat-form-field style="width: 60%;">
+	     	     <textarea maxlength="300" matInput [(ngModel)]="_empleado.lugarNac" required
+            ></textarea>
+	     	     <mat-error>Campo obligatorio</mat-error>
+	        </mat-form-field>
+		   </mat-grid-tile>
+		<mat-grid-tile>
+		   		<b>*Sexo:&nbsp;</b>
+		   		<mat-form-field style="width: 15%;">
+				  <mat-select [(ngModel)]="_empleado.sexo" required>
+				    <mat-option value="M">M</mat-option>
+				    <mat-option value="F">F</mat-option>
+				  </mat-select>
+				 <mat-error>Campo obligatorio</mat-error>
+				</mat-form-field>
+		   </mat-grid-tile>
+
+		   <mat-grid-tile>
+		     <b>*Dirección:&nbsp;</b>
+		     <mat-form-field style="width: 60%;">
+	     	     <textarea maxlength="300" matInput [(ngModel)]="_empleado.direccion" required
+            ></textarea>
+	     	     <mat-error>Campo obligatorio</mat-error>
+	        </mat-form-field>
+		   </mat-grid-tile>
+
+		   <mat-grid-tile>
+		     <b>*Teléfono:&nbsp;</b>
+		     <mat-form-field style="width: 35%;">
+	     	     <input maxlength="25" matInput [(ngModel)]="_empleado.telefono" required>
+	     	     <mat-error>Campo obligatorio</mat-error>
+	        </mat-form-field>
+		   </mat-grid-tile>
+
+		   <mat-grid-tile>
+			   		<b>*Hijos:&nbsp;</b>
+			   		<mat-checkbox style="width: 10%;" color="primary" [(ngModel)]="_empleado.hijos"></mat-checkbox>
+			   		<div *ngIf="_empleado.hijos">
+			   			<b>*N° Hijos:&nbsp;</b>
+					     <mat-form-field style="width: 10%;">
+				     	     <input maxlength="2" matInput [(ngModel)]="_empleado.nHijos" (keypress)="validarNumeros($event)" (paste)="false" required>
+				     	     <mat-error></mat-error>
+				        </mat-form-field>
+			   		</div>
+		   </mat-grid-tile>
+
+		   <mat-grid-tile>
+		   		<b>*Talla Camisa:&nbsp;</b>
+		   		<mat-form-field style="width: 15%;">
+				  <mat-select [(ngModel)]="_empleado.tallaCamisa" required>
+				    <mat-option value="XS">XS</mat-option>
+				    <mat-option value="S">S</mat-option>
+				    <mat-option value="M">M</mat-option>
+				    <mat-option value="L">L</mat-option>
+				    <mat-option value="XL">XL</mat-option>
+				    <mat-option value="XXL">XXL</mat-option>
+				  </mat-select>
+				 <mat-error>Campo obligatorio</mat-error>
+				</mat-form-field>
+		   </mat-grid-tile>
+
+		   <mat-grid-tile>
+		   		<b>*Talla Pantalón:&nbsp;</b>
+		   		<mat-form-field style="width: 15%;">
+				  <mat-select [(ngModel)]="_empleado.tallaPantalon" required>
+				    <mat-option value="28">28</mat-option>
+				    <mat-option value="30">30</mat-option>
+				    <mat-option value="32">32</mat-option>
+				    <mat-option value="34">34</mat-option>
+				    <mat-option value="36">36</mat-option>
+				    <mat-option value="38">38</mat-option>
+				    <mat-option value="40">40</mat-option>
+				    <mat-option value="42">42</mat-option>
+				  </mat-select>
+				 <mat-error>Campo obligatorio</mat-error>
+				</mat-form-field>
+		   </mat-grid-tile>
+
+		   <mat-grid-tile>
+		   		<b>*Talla Zapato:&nbsp;</b>
+		   		<mat-form-field style="width: 15%;">
+				  <mat-select [(ngModel)]="_empleado.tallaZapato" required>
+				    <mat-option value="35">35</mat-option>
+				    <mat-option value="36">36</mat-option>
+				    <mat-option value="37">37</mat-option>
+				    <mat-option value="38">38</mat-option>
+				    <mat-option value="39">39</mat-option>
+				    <mat-option value="40">40</mat-option>
+				    <mat-option value="41">41</mat-option>
+				    <mat-option value="42">42</mat-option>
+				    <mat-option value="43">43</mat-option>
+				    <mat-option value="44">44</mat-option>
+				  </mat-select>
+				 <mat-error>Campo obligatorio</mat-error>
+				</mat-form-field>
+		   </mat-grid-tile>
+
+		   <mat-grid-tile>
+		     <b>*Estatura (Mts.):&nbsp;</b>
+		     <mat-form-field style="width: 10%;">
+	     	     <input maxlength="4" matInput [(ngModel)]="_empleado.estatura" (paste)="false" (keypress)="_validarDecimales($event)" required>
+	     	     <mat-error>Campo obligatorio</mat-error>
+	        </mat-form-field>
+		   </mat-grid-tile>
+
+		   <mat-grid-tile>
+		   		<b>*Departamento:&nbsp;</b>
+		   		<mat-form-field style="width: 45%;">
+				  <mat-select [(ngModel)]="idDepto" (ngModelChange)="filtrarCargo()" required>
+				    <mat-option *ngFor="let item of _arrDepto" [value]="item.id">
+				      {{ item.nombre }}
+				    </mat-option>
+				  </mat-select>
+				 <mat-error>Campo obligatorio</mat-error>
+				</mat-form-field>
+		   </mat-grid-tile>
+
+		   <mat-grid-tile>
+		   		<b>*Cargo:&nbsp;</b>
+		   		<mat-form-field style="width: 45%;">
+				  <mat-select [(ngModel)]="_empleado.idCargo" required>
+				    <mat-option *ngFor="let item of _arrCargoFiltrado" [value]="item.id">
+				      {{ item.nombre }}
+				    </mat-option>
+				  </mat-select>
+				 <mat-error>Campo obligatorio</mat-error>
+				</mat-form-field>
+		   </mat-grid-tile>
+
+		   <mat-grid-tile>
+		   		<b>*Activo:&nbsp;</b>
+		   		<mat-form-field style="width: 25%;">
+				  <mat-select [(ngModel)]="_empleado.activo" required>
+				    <mat-option value="1">SI</mat-option>
+				    <mat-option value="0">NO</mat-option>
+				  </mat-select>
+				 <mat-error>Campo obligatorio</mat-error>
+				</mat-form-field>
+		   </mat-grid-tile>
+
+
+		 </mat-grid-list>
+		 <br>
+		 <br>
+		 <div align="right" class="button-row">
+          <button [disabled]="bloquearBotonGuardar()" (click)="agregarEditar()" mat-raised-button color="primary"><mat-icon>check</mat-icon>Guardar</button>
+          <button (click)="volverListado()" mat-raised-button color="basic"><mat-icon>reply</mat-icon>Volver</button>
+        </div>
+</mat-card>

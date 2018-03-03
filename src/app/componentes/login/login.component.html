@@ -1,0 +1,31 @@
+<mat-card>
+    <mat-toolbar color="primary">
+    <mat-icon>account_box</mat-icon><h6><span>&nbsp;INICIO DE SESIÓN</span></h6>
+  </mat-toolbar>
+  <br>
+    <div class="container">
+        <p align="center"> 
+            <img src="assets/imagenes/AppBeta.jpg" width="15%"/>
+        </p>
+        <mat-form-field>
+          <input matInput placeholder="Usuario" [(ngModel)]="this._login.usuario" maxlength="30" required>
+          <mat-error>Campo obligatorio</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput maxlength="30" placeholder="Contraseña" [(ngModel)]="this._login.contrasena" [type]="visible ? 'text' : 'password'" required>
+          <mat-icon matSuffix (click)="visible = !visible">{{visible ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <mat-error ng-show="false">Campo obligatorio</mat-error>
+        </mat-form-field>
+
+        <div align="right" class="button-row">
+          <button [disabled]="bloquearBotonAcceder()" (click)="autenticar()" mat-raised-button color="primary"><mat-icon>check</mat-icon>Acceder</button>
+          <button (click)="redirigirRecuperarContrasena()" mat-raised-button color="warn"><mat-icon>autorenew</mat-icon>Recuperar Contraseña</button>
+        </div>
+    </div>
+</mat-card>
+
+
+
+
+
+  

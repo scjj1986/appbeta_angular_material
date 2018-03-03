@@ -1,0 +1,21 @@
+.divCapa1{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background-color: transparent;
+}
+
+.divCapa2 {
+    overflow: auto;
+    position: top;
+    bottom:0;
+    left:0;
+    right:0;
+    background-color: transparent;
+}
+
+mat-sidenav-container{
+  background-color: transparent;
+}

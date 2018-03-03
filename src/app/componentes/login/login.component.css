@@ -1,0 +1,29 @@
+mat-card{
+  max-width: 50%;
+  margin: 0 auto;
+  margin-top: 6%;
+  margin-bottom: 7%;
+  min-height: 40%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.container > * {
+  width: 100%;
+}
+
+right-align {
+  text-align: right;
+}
+
+input.right-align::-webkit-outer-spin-button,
+input.right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.right-align {
+  -moz-appearance: textfield;
+}
