@@ -1,7 +1,7 @@
 <?
 include("base-de-datos.php");
 class empleado{
-	public $bd,$id,$idCargo,$tDoc,$nDoc,$nombre,$apellido,$fNac,$lugarNac,$direccion,$telefono,$hijos,$nHijos,$tallaCamisa,$tallaPantalon,$tallaZapato,$estatura,$activo,$sexo;
+	public $bd,$id,$idCargo,$tDoc,$nDoc,$nombre,$apellido,$fNac,$lugarNac,$direccion,$telefono,$hijos,$nHijos,$tallaCamisa,$tallaPantalon,$tallaZapato,$estatura,$activo,$sexo,$nombreCargo,$nombredepto;
 
 	function __construct(){
 		$this->bd = new baseDeDatos();
@@ -64,6 +64,33 @@ class empleado{
 	public function duplicadoDocumentoIdentidad(){
 		$this->bd->cadenaConsulta="CALL pa_empleadoDuplicadoDocumentoIdentidad (".$this->id.",'".$this->tDoc."','".$this->nDoc."')";
         return !($this->bd->consultaVacia());
+	}
+
+	public function cargarDatosPorIdReporte($id){
+		$this->bd->cadenaConsulta="CALL pa_empleadoReporteBuscarPorId ($id)";
+		$this->bd->conectar();
+	    $this->bd->consulta();
+	    $resultado=$this->bd->registrosConsulta();
+	    $this->id= $id;
+	    $this->nombreCargo = $resultado["nombrecargo"];
+	    $this->nombreDepto = $resultado["nombredepto"];
+	    $this->tDoc = $resultado["tdoc"];
+	    $this->nDoc =  $resultado["ndoc"];
+	    $this->nombre =  $resultado["nombre"];
+	    $this->apellido = $resultado["apellido"];
+	    $this->fNac =  $resultado["fnac"];
+	    $this->lugarNac =  $resultado["lugar_nac"];
+	    $this->direccion =  $resultado["direccion"];
+	    $this->telefono = $resultado["telefono"];
+	    $this->hijos =  $resultado["hijos"];
+	    $this->nHijos = $resultado["n_hijos"];
+	    $this->tallaCamisa =  $resultado["talla_camisa"];
+	    $this->tallaPantalon = $resultado["talla_pantalon"];
+	    $this->tallaZapato =  $resultado["talla_zapato"];
+	    $this->estatura =  $resultado["estatura"];
+	    $this->activo =  $resultado["activo"];
+	    $this->sexo =  $resultado["sexo"];
+	    $this->bd->desconectar();
 	}
 
 	public function buscarPorId($id){

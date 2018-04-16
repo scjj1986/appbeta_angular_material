@@ -7,5 +7,8 @@ export const rutaPhpDepartamento=rutaPhp+"departamento/";
 export const rutaPhpCargo=rutaPhp+"cargo/";
 export const rutaPhpEmpleado=rutaPhp+"empleado/";
 
+export const rutaPhpReportes="http://localhost/appbeta_angular_material/src/app/php/reportes/";
+export const rutaPhpReportesEmpleado=rutaPhpReportes+"empleado/";
+
 export const letras=' ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyzàáÀÁéèÈÉíìÍÌïÏóòÓÒúùÚÙüÜ ';
 export const numeros='1234567890';

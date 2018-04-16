@@ -2,7 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {BaseDatosService} from '../../servicios/base-datos.service';
 import {filtrarTabla,logueado} from '../../utilidades/funciones';
-import {rutaPhpEmpleado} from '../../utilidades/constantes';
+import {rutaPhpEmpleado,rutaPhpReportesEmpleado} from '../../utilidades/constantes';
 
 import {MatPaginator,MatTableDataSource,MatTableModule,MatSort,MatSortModule} from '@angular/material';
 
@@ -16,7 +16,7 @@ export class EmpleadoListadoComponent {
 
   baseDatosService:BaseDatosService;
   ruta: Router;
-  columnas = ['ficha','docide','nombre','cargo','departamento','sueldo','editar'];
+  columnas = ['ficha','docide','nombre','cargo','departamento','sueldo','opciones'];
   tabla: MatTableDataSource<Object>;
 
   @ViewChild(MatPaginator) paginador: MatPaginator;
@@ -47,6 +47,12 @@ export class EmpleadoListadoComponent {
 
   redirigirFormulario(id){
     this.ruta.navigate(['/empleadoFormulario',id]);
+  }
+
+  generarPlanillaEmpleado(id){
+    window.open(rutaPhpReportesEmpleado+"reporte-empleado-ficha.php?id="+id,"Reporte de Ficha de Empleado","width=900,height=500,scrollbars=NO");
+
+
   }
 
 }

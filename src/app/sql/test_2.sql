@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 19-02-2018 a las 16:58:07
+-- Tiempo de generación: 16-04-2018 a las 13:21:12
 -- Versión del servidor: 5.7.17-log
 -- Versión de PHP: 5.6.30
 
@@ -113,6 +113,12 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_empleadoMaximoId` ()  BEGIN
 	SELECT MAX(id) as id FROM empleado;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_empleadoReporteBuscarPorId` (IN `_id` INT)  NO SQL
+BEGIN
+	SELECT e.id, e.tdoc, e.ndoc, e.nombre, e.apellido, e.fnac, e.lugar_nac, e.sexo,e.direccion, e.telefono, e.hijos,e.n_hijos, e.talla_camisa, e.talla_zapato, e.talla_pantalon, e.estatura, e.activo, c.nombre as nombrecargo, d.nombre as nombredepto, c.sueldo FROM empleado e INNER JOIN cargo c ON e.id_cargo=c.id INNER JOIN departamento d ON c.id_depto=d.id WHERE e.id=_id;
+
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_loginBuscarUsuario` (IN `_login` VARCHAR(30), IN `_clave` VARCHAR(30))  BEGIN
 	SELECT * FROM usuario WHERE  login=_login and clave=_clave;
 END$$
@@ -190,7 +196,7 @@ CREATE TABLE `cargo` (
 
 INSERT INTO `cargo` (`id`, `id_depto`, `codigo`, `nombre`, `sueldo`) VALUES
 (1, 1, '001', 'GERENTE', 800000),
-(2, 3, '002', 'GERENTE', 900000),
+(2, 3, '002', 'GERENTE', 950000),
 (3, 7, '003', 'GERENTE', 900000),
 (4, 7, '004', 'COORD DE SISTEMAS', 750000),
 (5, 7, '005', 'ANALISTA DE SISTEMAS I', 600000),
@@ -198,7 +204,9 @@ INSERT INTO `cargo` (`id`, `id_depto`, `codigo`, `nombre`, `sueldo`) VALUES
 (7, 7, '007', 'ANALISTA DE SISTEMAS III', 450000),
 (8, 8, '008', 'COORD CUENTAS POR PAGAR', 800000),
 (9, 8, '009', 'GERENTE', 1000000),
-(10, 9, '010', 'GERENTE', 9000000);
+(10, 9, '010', 'GERENTE', 9000000),
+(11, 6, '011', 'GERENTE', 1000000),
+(12, 12, '012', 'GERENTE', 1100000);
 
 -- --------------------------------------------------------
 
@@ -224,7 +232,8 @@ INSERT INTO `departamento` (`id`, `codigo`, `nombre`) VALUES
 (6, '006', 'ANIMACION'),
 (7, '007', 'SISTEMAS'),
 (8, '008', 'ADMINISTRACION'),
-(9, '009', 'OPERACIONES');
+(9, '009', 'OPERACIONES'),
+(12, '010', 'ATENCION AL PUBLICO');
 
 -- --------------------------------------------------------
 
@@ -306,14 +315,18 @@ INSERT INTO `usuario` (`id`, `tdoc`, `ndoc`, `nombre`, `apellido`, `login`, `cla
 (2, 'V', '11000001', 'ELSA', 'CAPUNTA', 'ECAPUNTA', '123456', 'CANCION FAVORITA', 'piensa en mi', 'ADMINISTRADOR', 1, 'LA ASUNCION', '0412-0000000'),
 (3, 'V', '11000002', 'VICENTE', 'LEVI DENTE', 'VLDENTE', '123456', 'COMIDA FAVORITA', 'pizza', 'ADMINISTRADOR', 1, 'PUNTA DE PIEDRAS', '0142-000002'),
 (4, 'V', '11000003', 'RICKZABETH MARIANA', 'GONZALEZ BERMUDEZ', 'RGONZALEZ', '123456', 'ARTISTA FAVORITO', 'pipe bueno', 'ADMINISTRADOR', 1, 'LOS MILLANES', '0416-5555555'),
-(5, 'V', '11000004', 'ANA LISA', 'MELCOCO', 'AMELCOCO', '123456', 'ARTISTA FAVORITO', 'maluma', 'ADMINISTRADOR', 1, 'LA SABANETA', '0426-0000008'),
+(5, 'V', '11000004', 'ANA LISA', 'MELCOCO', 'AMELCOCO', '123456', 'ARTISTA FAVORITO', 'maluma', 'ADMINISTRADOR', 1, 'LA SALINA', '0426-0000008'),
 (6, 'V', '11000005', 'RUBEN', 'MARIN', 'RMARIN', '123456', 'ARTISTA FAVORITO', 'antonio aguilar', 'ADMINISTRADOR', 1, 'porlamar', '0424-000006'),
 (11, 'V', '11000006', 'CARLA', 'MAESTRE', 'CMAESTRE', '123', 'ARTISTA FAVORITO', 'Array', 'OPERADOR', 1, 'BOCA DE RIO', '0416-1111111'),
 (12, 'V', '11000009', 'BRIAN', 'PALMA', 'BPALMA', '1234', 'COMIDA FAVORITA', 'pizza', 'OPERADOR', 1, 'PUERTO LA CRUZ', '0426-1000000'),
 (14, 'V', '11000010', 'MARIEL', 'TAVAREZ', 'MTAVAREZ', '123456', 'COLOR FAVORITO', 'verde', 'OPERADOR', 0, 'BARQUISIMETO', '0414-1116655'),
 (15, 'V', '11000011', 'SORANGEL ALEJANDRA', 'GOMEZ LUGO', 'SGOMEZ', '654321', 'MASCOTA', 'floki', 'OPERADOR', 1, 'SAN ANTONIO', '0424-8888887'),
 (16, 'V', '11000012', 'MIGUEL', 'BELLO', 'MBELLO', '112233', 'CANCION FAVORITA', 'felices los 4', 'ADMINISTRADOR', 1, 'EL SACO', '0426-9999999'),
-(17, 'V', '11000020', 'CARLOS', 'MARICHAL', 'CMARICHAL', '123456', 'COLOR FAVORITO', 'verde', 'OPERADOR', 1, 'PAMPATAR', '0412-8889977');
+(17, 'V', '11000020', 'CARLOS', 'MARICHAL', 'CMARICHAL', '123456', 'COLOR FAVORITO', 'verde', 'OPERADOR', 1, 'PAMPATAR', '0412-8889977'),
+(18, 'V', '11000007', 'MILGRED', 'PEROTTI', 'MPEROTTI', '12345678', 'COLOR FAVORITO', 'violeta', 'ADMINISTRADOR', 1, 'PILAR', '549999999'),
+(19, 'V', '11000008', 'MARCO', 'POLO', 'MPOLO', '12345678', 'COMIDA FAVORITA', 'pasticho', 'ADMINISTRADOR', 1, 'CARACAS', '0212-9999999'),
+(20, 'V', '11000013', 'DIEGO', 'MARTINO', 'DMARTINO', '87654321', 'NOMBRE DE MASCOTA', 'yuyi', 'OPERADOR', 1, 'MARACAIBO', '0281-2222222'),
+(21, 'V', '11000014', 'RONNY', 'ESPINOZA', 'RESPINOZA', '11223344', 'CANCION FAVORITA', 'el termo', 'OPERADOR', 1, 'LA PICA', '0258-7777777');
 
 --
 -- Índices para tablas volcadas
@@ -357,12 +370,12 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `cargo`
 --
 ALTER TABLE `cargo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `departamento`
 --
 ALTER TABLE `departamento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `empleado`
 --
@@ -377,7 +390,7 @@ ALTER TABLE `notas`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
